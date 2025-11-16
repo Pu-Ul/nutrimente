@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación - NutriMente: Perfil de Bienestar</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* PALETA FINAL Y TIPOGRAFÍA DE LUJO */
+        .bg-terracotta { background-color: #A25B5B; }
+        .text-terracotta { color: #A25B5B; }
+        .hover\:bg-terracotta-dark:hover { background-color: #7D4545; }
+        .text-slate-800 { color: #334155; }
+        .bg-page-light { background-color: #F5F7F9; } /* Fondo Sutil */
+        .border-terracotta-light { border-color: #A25B5B; }
+
+        /* FUENTES DE LUJO */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body { font-family: 'Poppins', sans-serif; }
+        .font-luxury { font-family: 'Playfair Display', serif; }
+
+        /* CORRECCIÓN DE BOTONES DE CARRUSEL (Estética) */
+        .carousel-control-prev-icon, .carousel-control-next-icon { background-image: none !important; opacity: 0 !important; width: 0 !important; }
+        .carousel-indicators [data-bs-target] { background-color: #A25B5B; border: 1px solid #A25B5B; }
+        
+        /* ESTILO PARA EL MENÚ FLOTANTE LATERAL IZQUIERDO */
+        #floating-menu {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 150px; 
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: none; 
+            transition: transform 0.3s ease-in-out;
+            max-height: 80vh; 
+            overflow-y: auto; 
+            padding: 12px;
+        }
+
+        /* ESTILO PARA EL BOTÓN FLOTANTE (Scroll-to-Top) */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: none;
+            z-index: 1000;
+        }
+        
+        /* ESTILO PARA EL BOTÓN DE RESTAURAR (Cuando el menú está escondido) */
+        #restore-menu-btn {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5000; 
+            display: none;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased bg-page-light">
+
+    <header class="bg-white shadow-lg border-b-4 border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-5 md:justify-start md:space-x-10">
+                
+                <div class="flex flex-col justify-start lg:w-0 lg:flex-1">
+                    <a href="index.html">
+                        <span class="text-3xl font-extrabold text-slate-800 font-luxury leading-none">NutriMente</span>
+                        <span class="text-xs text-terracotta uppercase tracking-widest block font-medium">Bienestar Integral</span>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-10 text-slate-800 font-medium">
+                    <a href="index.html" class="hover:text-terracotta">Inicio</a>
+                    <a href="planificador.html" class="hover:text-terracotta">Planificador</a>
+                    <a href="servicios.html" class="hover:text-terracotta">Servicios</a>
+                    <a href="evaluacion.html" class="hover:text-terracotta font-bold text-terracotta">Evaluación</a> <a href="contacto.html" class="hover:text-terracotta">Contacto</a>
+                </nav>
+                
+                <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                    <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-lg text-base font-medium text-white bg-terracotta hover:bg-terracotta-dark">
+                        Agendar Consulta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="floating-menu" class="hidden lg:block bg-white shadow-2xl rounded-r-lg border-r-4 border-terracotta-light">
+        <nav class="flex flex-col space-y-3 px-4 text-sm font-medium">
+            <span class="text-slate-800 uppercase tracking-widest text-xs mb-2 border-b border-gray-200 pb-1 font-bold">ACCESO RÁPIDO</span>
+            
+            <a href="#test-block" class="text-terracotta font-bold text-sm">AUTO-TEST</a>
+            <ul class="space-y-1 ml-2 list-disc text-gray-600">
+                <li><a href="#test-block" class="hover:text-terracotta">Comenzar Perfil</a></li>
+                <li><a href="#proceso" class="hover:text-terracotta">Cómo Funciona</a></li>
+            </ul>
+            
+            <a href="#ciencia" class="text-terracotta font-bold text-sm mt-3">ENFOQUE</a>
+            <ul class="space-y-1 ml-2 list-disc text-gray-600">
+                <li><a href="#ciencia" class="hover:text-terracotta">La Ciencia</a></li>
+                <li><a href="#" class="hover:text-terracotta">Consultas</a></li>
+            </ul>
+            
+            <a href="#contacto-section" class="text-terracotta font-bold text-sm mt-3">COMPAÑÍA</a>
+            <ul class="space-y-1 ml-2 list-disc text-gray-600">
+                <li><a href="#" class="hover:text-terracotta">Nosotros</a></li>
+                <li><a href="#" class="hover:text-terracotta">Términos Legales</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <button id="restore-menu-btn" class="bg-terracotta hover:bg-terracotta-dark text-white p-2 rounded-r-lg shadow-lg fixed top-1/2 transform -translate-y-1/2 z-50 transition-all" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m0-3h-9" />
+        </svg>
+    </button>
+
+    <main id="main-content">
+        <section class="bg-page-light py-16 text-center border-b border-gray-300">
+            <h1 class="text-4xl font-black text-slate-800 font-luxury">
+                Tu Perfil de Bienestar
+            </h1>
+            <p class="text-xl text-gray-600 mt-3 max-w-3xl mx-auto">
+                Comienza tu camino guiado con nuestra evaluación integral de mente y cuerpo.
+            </p>
+        </section>
+
+        <section id="test-block" class="py-16 bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center p-8 border-4 border-dashed border-terracotta-light rounded-xl shadow-xl">
+                    
+                    <div class="lg:col-span-1">
+                        <img src="pexels-kampus-8054028.jpg" alt="Persona concentrada escribiendo en su cuaderno junto a un portátil, simbolizando el proceso de autoevaluación." 
+                            class="rounded-lg w-full h-auto object-cover">
+                    </div>
+
+                    <div class="lg:col-span-2 text-center lg:text-left">
+                        <h2 class="text-2xl font-bold mb-4 text-terracotta font-luxury">
+                            Crea tu Perfil Personal
+                        </h2>
+                        <p class="text-gray-700 mb-6">
+                            Inicia sesión o crea tu cuenta. Es **rápido, confidencial** y el punto de partida para tu transformación.
+                        </p>
+                        <a href="URL_INICIO_SESION_REGISTRO" class="
+                            bg-terracotta hover:bg-terracotta-dark text-white font-extrabold py-3 px-10 rounded-lg shadow-lg transition-colors inline-block
+                        ">
+                            Comenzar Test
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="proceso" class="py-20 bg-page-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center mb-10 text-slate-800 font-luxury">
+                    Los 3 Pasos de tu Diagnóstico
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    
+                    <div class="text-center p-6 bg-white rounded-lg shadow-md border-b-4 border-terracotta-light">
+                        <div class="text-6xl font-extrabold text-terracotta mb-3 font-luxury">1</div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-800 font-luxury">Responde</h3>
+                        <p class="text-gray-600">Completa el cuestionario de bienestar emocional y nutricional.</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-white rounded-lg shadow-md border-b-4 border-terracotta-light">
+                        <div class="text-6xl font-extrabold text-terracotta mb-3 font-luxury">2</div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-800 font-luxury">Recibe</h3>
+                        <p class="text-gray-600">Obtén tu informe de perfil de salud integral de forma inmediata.</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-white rounded-lg shadow-md border-b-4 border-terracotta-light">
+                        <div class="text-6xl font-extrabold text-terracotta mb-3 font-luxury">3</div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-800 font-luxury">Agenda</h3>
+                        <p class="text-gray-600">Usa los resultados para agendar tu primera consulta guiada.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="ciencia" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <div class="text-gray-800">
+                        <h2 class="text-3xl font-bold mb-4 text-terracotta font-luxury">
+                            La Ciencia detrás de tu Bienestar
+                        </h2>
+                        <p class="mb-4 text-lg text-gray-600">
+                            Nuestras evaluaciones combinan principios de psicología y hábitos alimenticios. Recibirás recomendaciones basadas en datos para optimizar tu **rendimiento mental** y **físico**.
+                        </p>
+                        <a href="servicios.html" class="
+                            text-terracotta hover:text-slate-800 font-bold text-lg
+                        ">
+                            Ver tipos de consulta disponibles ⟶
+                        </a>
+                    </div>
+                    
+                    <div>
+                        <img src="pexels-ozgomz-2846814.jpg" alt="Libro abierto con gafas y una taza de café, simbolizando estudio y reflexión" 
+                            class="rounded-xl shadow-2xl w-full h-auto object-cover border-2 border-terracotta-light">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contacto-section" class="py-16 bg-page-light">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <h2 class="text-3xl font-bold text-center mb-10 text-slate-800 font-luxury">
+                    Agenda tu Consulta
+                </h2>
+
+                <div class="bg-white p-8 rounded-xl shadow-2xl border-t-4 border-terracotta">
+                    <form action="#" method="POST" class="space-y-6">
+                        
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracotta focus:border-terracotta">
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-terracotta hover:bg-terracotta-dark text-white font-semibold py-3 rounded-lg shadow-md transition-colors">
+                            Contactar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <a href="#main-content" id="scroll-to-top" class="bg-terracotta hover:bg-terracotta-dark text-white p-3 rounded-full shadow-lg transition-colors fixed bottom-4 right-4" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </a>
+    
+    <footer class="bg-slate-800 text-white pt-10 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center">
+                <h3 class="text-2xl font-bold text-terracotta font-luxury mb-4">Recursos Destacados</h3>
+                
+                <div id="recursosCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner bg-white text-slate-800 p-6 rounded-lg shadow-lg">
+                        
+                        <div class="carousel-item active text-center">
+                            <p class="text-lg italic font-semibold">"Clase de Cocina Anti-Estrés: Recetas Rápidas"</p>
+                            <span class="text-sm text-terracotta font-medium">Próximo Taller: 25 de Marzo</span>
+                        </div>
+                        
+                        <div class="carousel-item text-center">
+                            <p class="text-lg italic font-semibold">"Guía Gratuita: 5 Pasos para Mejorar la Higiene del Sueño"</p>
+                            <span class="text-sm text-terracotta font-medium">Descarga Inmediata</span>
+                        </div>
+                        
+                        <div class="carousel-item text-center">
+                            <p class="text-lg italic font-semibold">"Artículo: ¿Cómo la Terapia Nutricional Ayuda a la Ansiedad?"</p>
+                            <span class="text-sm text-terracotta font-medium">Leer en el Blog</span>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev text-slate-800 hover:text-terracotta" type="button" data-bs-target="#recursosCarousel" data-bs-slide="prev">
+                        <span aria-hidden="true" class="text-4xl">&#10094;</span> 
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next text-slate-800 hover:text-terracotta" type="button" data-bs-target="#recursosCarousel" data-bs-slide="next">
+                        <span aria-hidden="true" class="text-4xl">&#10095;</span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-t border-gray-700 pt-8">
+                
+                <div class="col-span-2 md:col-span-1">
+                    <img class="h-8 w-auto mb-4" src="logo nutrimente mejorado.jpg" alt="Logo NutriMente Blanco">
+                    <p class="text-sm text-gray-400">Bienestar integral, cuerpo y mente.</p>
+                </div>
+                
+                <div>
+                    <h5 class="text-terracotta font-semibold mb-3">Servicios</h5>
+                    <ul>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-terracotta text-sm">Terapia Nutricional</a></li>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-terracotta text-sm">Terapia Psicológica</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Talleres Grupales</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Coaching de Hábitos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-terracotta font-semibold mb-3">Recursos</h5>
+                    <ul>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Blog y Artículos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Herramientas</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Recetas</a></li>
+                        <li><a href="evaluacion.html" class="text-gray-300 hover:text-terracotta text-sm">Auto-Test</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-terracotta font-semibold mb-3">Compañía</h5>
+                    <ul>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Nosotros</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Únete al Equipo</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Contacto</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Términos Legales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-span-2 md:col-span-1">
+                    <h5 class="text-terracotta font-semibold mb-3">Conéctate</h5>
+                    <ul>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-2xl">FB</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-2xl">IG</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-2xl">LN</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+                <p class="text-sm text-gray-400">&copy; 2025 NutriMente. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        const floatingMenu = document.getElementById('floating-menu');
+        const collapseBtn = document.getElementById('collapse-menu-btn');
+        const restoreBtn = document.getElementById('restore-menu-btn');
+
+        // Función para mostrar/ocultar el menú basado en el estado (abierto/cerrado)
+        const toggleMenu = (show) => {
+            if (show) {
+                floatingMenu.style.transform = 'translateY(-50%) translateX(0)';
+                restoreBtn.style.display = 'none';
+            } else {
+                floatingMenu.style.transform = 'translateY(-50%) translateX(-100%)';
+                if (window.innerWidth >= 1024) { 
+                    restoreBtn.style.display = 'block';
+                }
+            }
+        };
+
+        // Función principal que escucha el scroll y tamaño de pantalla
+        const handleVisibility = () => {
+            const scrollY = window.scrollY;
+            const isDesktop = window.innerWidth >= 1024;
+            
+            // 1. Control del Botón Scroll-to-Top
+            scrollToTopBtn.style.display = (scrollY > 300) ? 'block' : 'none';
+
+            // 2. Control del Menú Flotante Lateral
+            if (isDesktop) {
+                floatingMenu.style.display = 'block'; 
+                
+                if (floatingMenu.style.transform !== 'translateY(-50%) translateX(-100%)') {
+                    floatingMenu.style.transform = 'translateY(-50%) translateX(0)';
+                    restoreBtn.style.display = 'none';
+                }
+            } else {
+                floatingMenu.style.display = 'none';
+                restoreBtn.style.display = 'none';
+            }
+        };
+
+        // Event Listeners para esconder/mostrar
+        if (collapseBtn) collapseBtn.addEventListener('click', () => toggleMenu(false)); 
+        if (restoreBtn) restoreBtn.addEventListener('click', () => toggleMenu(true));  
+
+        // Inicialización y eventos de visibilidad
+        window.addEventListener('scroll', handleVisibility);
+        window.addEventListener('resize', handleVisibility); 
+        handleVisibility();
+        
+        // Esconder el menú al cargar para que aparezca el botón Restaurar si es necesario
+        if (window.innerWidth >= 1024) {
+             toggleMenu(false); 
+        }
+    </script>
+</body>
+</html>

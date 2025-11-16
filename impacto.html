@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impacto Social - NutriMente: Mitad Ángel, Mitad Humano</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* PALETA FINAL Y TIPOGRAFÍA DE LUJO */
+        .bg-terracotta { background-color: #A25B5B; }
+        .text-terracotta { color: #A25B5B; }
+        .hover\:bg-terracotta-dark:hover { background-color: #7D4545; }
+        .text-slate-800 { color: #334155; }
+        .bg-page-light { background-color: #F5F7F9; } /* Fondo Sutil */
+        .border-terracotta-light { border-color: #A25B5B; }
+
+        /* FUENTES DE LUJO */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body { font-family: 'Poppins', sans-serif; }
+        .font-luxury { font-family: 'Playfair Display', serif; }
+
+        /* CORRECCIÓN DE BOTONES DE CARRUSEL (Estética) */
+        .carousel-control-prev-icon, .carousel-control-next-icon { background-image: none !important; opacity: 0 !important; width: 0 !important; }
+        .carousel-indicators [data-bs-target] { background-color: #A25B5B; border: 1px solid #A25B5B; }
+        
+        /* ESTILO PARA EL MENÚ FLOTANTE LATERAL IZQUIERDO */
+        #floating-menu {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 150px; 
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: none; 
+            transition: transform 0.3s ease-in-out;
+            max-height: 80vh; 
+            overflow-y: auto; 
+            padding: 12px;
+        }
+
+        /* ESTILO PARA EL BOTÓN FLOTANTE (Scroll-to-Top) */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: none;
+            z-index: 1000;
+        }
+        
+        /* ESTILO PARA EL BOTÓN DE RESTAURAR (Cuando el menú está escondido) */
+        #restore-menu-btn {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5000; 
+            display: none;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased bg-page-light">
+
+    <header class="bg-white shadow-lg border-b-4 border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-5 md:justify-start md:space-x-10">
+                
+                <div class="flex flex-col justify-start lg:w-0 lg:flex-1">
+                    <a href="index.html">
+                        <span class="text-3xl font-extrabold text-slate-800 font-luxury leading-none">NutriMente</span>
+                        <span class="text-xs text-terracotta uppercase tracking-widest block font-medium">Bienestar Integral</span>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-10 text-slate-800 font-medium">
+                    <a href="index.html" class="hover:text-terracotta">Inicio</a>
+                    <a href="planificador.html" class="hover:text-terracotta">Planificador</a>
+                    <a href="servicios.html" class="hover:text-terracotta">Servicios</a>
+                    <a href="evaluacion.html" class="hover:text-terracotta">Evaluación</a>
+                    <a href="impacto.html" class="hover:text-terracotta font-bold text-terracotta">Impacto</a> 
+                    <a href="contacto.html" class="hover:text-terracotta">Contacto</a>
+                </nav>
+                
+                <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                    <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-lg text-base font-medium text-white bg-terracotta hover:bg-terracotta-dark">
+                        Agendar Consulta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="floating-menu" class="hidden lg:block bg-white shadow-2xl rounded-r-lg border-r-4 border-terracotta-light">
+        <nav class="flex flex-col space-y-3 px-4 text-sm font-medium">
+            <span class="text-slate-800 uppercase tracking-widest text-xs mb-2 border-b border-gray-200 pb-1 font-bold">ACCESO RÁPIDO</span>
+            
+            <a href="#productos-libros" class="text-terracotta font-bold text-sm">TIENDA Y LIBROS</a>
+            <ul class="space-y-1 ml-2 list-disc text-gray-600">
+                <li><a href="#productos-libros" class="hover:text-terracotta">Libros Usados</a></li>
+                <li><a href="#productos-prendas" class="hover:text-terracotta">Prendas con Propósito</a></li>
+            </ul>
+            
+            <a href="#transparencia" class="text-terracotta font-bold text-sm mt-3">IMPACTO</a>
+            <ul class="space-y-1 ml-2 list-disc text-gray-600">
+                <li><a href="#transparencia" class="hover:text-terracotta">Transparencia</a></li>
+                <li><a href="#fundaciones" class="hover:text-terracotta">Fundaciones</a></li>
+                <li><a href="#" class="hover:text-terracotta">Reportes Anuales</a></li>
+            </ul>
+            
+            <a href="#contacto-section" class="text-terracotta font-bold text-sm mt-3">COMPAÑÍA</a>
+            <ul class="space-y-1 ml-2 list-disc text-gray-600">
+                <li><a href="#" class="hover:text-terracotta">Nosotros</a></li>
+                <li><a href="#" class="hover:text-terracotta">Términos Legales</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <button id="restore-menu-btn" class="bg-terracotta hover:bg-terracotta-dark text-white p-2 rounded-r-lg shadow-lg fixed top-1/2 transform -translate-y-1/2 z-50 transition-all" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m0-3h-9" />
+        </svg>
+    </button>
+
+    <main id="main-content">
+        <section class="relative py-20 md:py-32 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-white rounded-xl shadow-2xl border-b-8 border-terracotta-light">
+                    
+                    <div class="p-10 text-center lg:text-left">
+                        <h1 class="text-5xl font-extrabold text-slate-800 leading-tight mb-4 font-luxury">
+                            Mitad Humano: El Cuidado Empieza en Ti
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-6">
+                            Tu **bienestar integral** es la base. Invierte en tu salud mental y nutricional antes de poder ayudar a otros.
+                        </p>
+                        <a href="servicios.html" class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-terracotta hover:bg-terracotta-dark rounded-md shadow-lg transition-colors">
+                            Ver mis Servicios
+                        </a>
+                    </div>
+                    
+                    <div class="hidden lg:block h-full min-h-96">
+                        <img class="w-full h-full object-cover rounded-r-xl" src="pexels-vika-glitter-392079-1094072.jpg" alt="Niños leyendo juntos, simbolizando la inversión social y la educación." style="min-height: 400px;">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="productos-libros" class="py-20 bg-page-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-800 font-luxury">
+                        Tienda con Propósito: Activa tu Lado Ángel
+                    </h2>
+                    <p class="text-gray-600">
+                        Elige una compra que transforma vidas. 100% de la ganancia va a fundaciones.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-xl border-t-4 border-terracotta-light">
+                        <h3 class="text-2xl font-bold text-terracotta mb-4 font-luxury">
+                            Libros Usados: Fomenta el Conocimiento
+                        </h3>
+                        <p class="mb-6 text-gray-700">
+                            Tu compra fomenta el conocimiento a bajo costo y reduce el impacto ambiental. Libros de Crianza, Psicología y Desarrollo Personal.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-page-light p-4 rounded-lg shadow-md text-center">
+                                <img src="pexels-jonathanborba-3021329.jpg" alt="Pila de libros de psicología usados" class="h-40 w-full object-cover rounded mb-2">
+                                <p class="font-semibold text-slate-800 text-sm">Libros de Crianza</p>
+                                <span class="text-terracotta font-bold text-sm">$15.000 COP</span>
+                            </div>
+                            <div class="bg-page-light p-4 rounded-lg shadow-md text-center">
+                                <img src="pexels-itismowgli-824197.jpg" alt="Libros de terapia y café" class="h-40 w-full object-cover rounded mb-2">
+                                <p class="font-semibold text-slate-800 text-sm">Textos de Psicología</p>
+                                <span class="text-terracotta font-bold text-sm">$12.000 COP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="productos-prendas" class="p-6 bg-white rounded-xl shadow-xl border-t-4 border-terracotta-light">
+                        <h3 class="text-2xl font-bold text-terracotta mb-4 font-luxury">
+                            Prendas: Viste el Propósito
+                        </h3>
+                        <p class="mb-6 text-gray-700">
+                            Adquiere prendas únicas con propósito. El 100% de la ganancia se destina a fundaciones de adultos mayores, niños y enfermos.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-page-light p-4 rounded-lg shadow-md text-center">
+                                <img src="pexels-rdne-6517205.jpg" alt="Camiseta con símbolo de apoyo social" class="h-40 w-full object-cover rounded mb-2">
+                                <p class="font-semibold text-slate-800 text-sm">Camiseta "Mindful"</p>
+                                <span class="text-terracotta font-bold text-sm">$40.000 COP</span>
+                            </div>
+                            <div class="bg-page-light p-4 rounded-lg shadow-md text-center">
+                                <img src="pexels-rdne-7564162.jpg" alt="Bolso minimalista" class="h-40 w-full object-cover rounded mb-2">
+                                <p class="font-semibold text-slate-800 text-sm">Bolso Minimalista</p>
+                                <span class="text-terracotta font-bold text-sm">$35.000 COP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="transparencia" class="py-16 bg-page-light">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4 font-luxury">
+                    Conoce el Rostro de tu Impacto
+                </h2>
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                    La transparencia es nuestro compromiso. Conoce a las fundaciones y a las personas que reciben tu apoyo.
+                </p>
+                
+                <div id="fundaciones" class="bg-white p-8 rounded-xl shadow-2xl border-l-4 border-terracotta-light h-56 flex items-center justify-center text-slate-800 italic">
+                    [Placeholder: Galería de fotos con historias y gráficos de transparencia.]
+                </div>
+
+                <a href="#" class="mt-6 text-terracotta hover:text-slate-800 font-bold inline-block">
+                    Leer más sobre nuestra misión Ángel-Humano ⟶
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <a href="#main-content" id="scroll-to-top" class="bg-terracotta hover:bg-terracotta-dark text-white p-3 rounded-full shadow-lg transition-colors fixed bottom-4 right-4" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </a>
+    
+    <footer class="bg-slate-800 text-white pt-10 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center">
+                <h3 class="text-2xl font-bold text-terracotta font-luxury mb-4">Recursos Destacados</h3>
+                
+                <div id="recursosCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner bg-white text-slate-800 p-6 rounded-lg shadow-lg">
+                        
+                        <div class="carousel-item active text-center">
+                            <p class="text-lg italic font-semibold">"Clase de Cocina Anti-Estrés: Recetas Rápidas"</p>
+                            <span class="text-sm text-terracotta font-medium">Próximo Taller: 25 de Marzo</span>
+                        </div>
+                        
+                        <div class="carousel-item text-center">
+                            <p class="text-lg italic font-semibold">"Guía Gratuita: 5 Pasos para Mejorar la Higiene del Sueño"</p>
+                            <span class="text-sm text-terracotta font-medium">Descarga Inmediata</span>
+                        </div>
+                        
+                        <div class="carousel-item text-center">
+                            <p class="text-lg italic font-semibold">"Artículo: ¿Cómo la Terapia Nutricional Ayuda a la Ansiedad?"</p>
+                            <span class="text-sm text-terracotta font-medium">Leer en el Blog</span>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev text-slate-800 hover:text-terracotta" type="button" data-bs-target="#recursosCarousel" data-bs-slide="prev">
+                        <span aria-hidden="true" class="text-4xl">&#10094;</span> 
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next text-slate-800 hover:text-terracotta" type="button" data-bs-target="#recursosCarousel" data-bs-slide="next">
+                        <span aria-hidden="true" class="text-4xl">&#10095;</span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-t border-gray-700 pt-8">
+                
+                <div class="col-span-2 md:col-span-1">
+                    <img class="h-8 w-auto mb-4" src="logo nutrimente mejorado.jpg" alt="Logo NutriMente Blanco">
+                    <p class="text-sm text-gray-400">Bienestar integral, cuerpo y mente.</p>
+                </div>
+                
+                <div>
+                    <h5 class="text-terracotta font-semibold mb-3">Servicios</h5>
+                    <ul>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-terracotta text-sm">Terapia Nutricional</a></li>
+                        <li><a href="servicios.html" class="text-gray-300 hover:text-terracotta text-sm">Terapia Psicológica</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Talleres Grupales</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Coaching de Hábitos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-terracotta font-semibold mb-3">Recursos</h5>
+                    <ul>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Blog y Artículos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Herramientas</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Recetas</a></li>
+                        <li><a href="evaluacion.html" class="text-gray-300 hover:text-terracotta text-sm">Auto-Test</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-terracotta font-semibold mb-3">Compañía</h5>
+                    <ul>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Nosotros</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Únete al Equipo</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Contacto</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-sm">Términos Legales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-span-2 md:col-span-1">
+                    <h5 class="text-terracotta font-semibold mb-3">Conéctate</h5>
+                    <ul>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-2xl">FB</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-2xl">IG</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-terracotta text-2xl">LN</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+                <p class="text-sm text-gray-400">&copy; 2025 NutriMente. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        const floatingMenu = document.getElementById('floating-menu');
+        const collapseBtn = document.getElementById('collapse-menu-btn');
+        const restoreBtn = document.getElementById('restore-menu-btn');
+
+        // Función para mostrar/ocultar el menú basado en el estado (abierto/cerrado)
+        const toggleMenu = (show) => {
+            if (show) {
+                floatingMenu.style.transform = 'translateY(-50%) translateX(0)';
+                restoreBtn.style.display = 'none';
+            } else {
+                floatingMenu.style.transform = 'translateY(-50%) translateX(-100%)';
+                if (window.innerWidth >= 1024) { 
+                    restoreBtn.style.display = 'block';
+                }
+            }
+        };
+
+        // Función principal que escucha el scroll y tamaño de pantalla
+        const handleVisibility = () => {
+            const scrollY = window.scrollY;
+            const isDesktop = window.innerWidth >= 1024;
+            
+            // 1. Control del Botón Scroll-to-Top
+            scrollToTopBtn.style.display = (scrollY > 300) ? 'block' : 'none';
+
+            // 2. Control del Menú Flotante Lateral
+            if (isDesktop) {
+                floatingMenu.style.display = 'block'; 
+                
+                if (floatingMenu.style.transform !== 'translateY(-50%) translateX(-100%)') {
+                    floatingMenu.style.transform = 'translateY(-50%) translateX(0)';
+                    restoreBtn.style.display = 'none';
+                }
+            } else {
+                floatingMenu.style.display = 'none';
+                restoreBtn.style.display = 'none';
+            }
+        };
+
+        // Event Listeners para esconder/mostrar
+        if (collapseBtn) collapseBtn.addEventListener('click', () => toggleMenu(false)); 
+        if (restoreBtn) restoreBtn.addEventListener('click', () => toggleMenu(true));  
+
+        // Inicialización y eventos de visibilidad
+        window.addEventListener('scroll', handleVisibility);
+        window.addEventListener('resize', handleVisibility); 
+        handleVisibility();
+        
+        // Esconder el menú al cargar para que aparezca el botón Restaurar si es necesario
+        if (window.innerWidth >= 1024) {
+             toggleMenu(false); 
+        }
+    </script>
+</body>
+</html>
